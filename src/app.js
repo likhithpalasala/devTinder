@@ -3,33 +3,25 @@ const express = require ('express');
 
 const app = express();
 
-//This will only handle GET call to /user
-app.use("/user", [
-    (req, res, next) => {
-    //Route Handler 1
-    console.log("Handling the route user!");
-    next();
-},
+const {adminAuth, userAuth} = require("./middlewares/auth.js");
 
-(req, res)=> {
-    //Route Handler 2
-    console.log("Handling the route user 2!");
-    res.send("2nd Response!")
+//Handle Auth Middleware for all requests GET, POST....
+app.use("/admin", adminAuth);
 
-},
+app.get("/user", userAuth, (req,res) => {
+    res.send("User data sent!");
+});
 
-(req, res)=> {
-    //Route Handler 3
-    console.log("Handling the route user 3!");
-    res.send("3rd Response!")
-},
+app.get("/admin/getAllData", (req, res) => {
+    //Logic to check if the request is authorizes
+      res.send("All the Data was sent");
+     
+});
 
-(req, res)=> {
-    //Route Handler 4
-    console.log("Handling the route user 4!");
-    res.send("4th Response!");
-}
-]);
+app.get("/admin/deleteUser", (req, res) => {
+    res.send("Deleted the user data");
+});
+
 
 app.listen(7777, () => {
     console.log("Server is successfully listening on port 7777..");
