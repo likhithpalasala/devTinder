@@ -5,13 +5,13 @@ const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        minLength: 4,
+        minLength: 3,
         maxLength: 50,
 
     },
     lastName: {
         type: String,
-        minLength: 4,
+        minLength: 3,
         maxLength: 50,
     },
     emailId: {
@@ -32,8 +32,8 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        minLength: 6,
-        maxLength: 20,
+        minLength: 4,
+        maxLength: 100,
         required: true,
         validate(value) {
             if(!validator.isStrongPassword(value)) {
