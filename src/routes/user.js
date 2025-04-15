@@ -4,7 +4,7 @@ const ConnectonRequest = require("../models/connectionRequest");
 const userRouter = express.Router();
 const User = require("../models/user")
 
-const userData = "firstName lastName photoUrl skills";
+const userData = "firstName lastName photoUrl skills about";
 
 // To get all the opending connections requests of the loggedIn user
 userRouter.get("/user/requests/received", userAuth, async (req, res) => {
